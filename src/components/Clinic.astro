@@ -1,0 +1,15 @@
+---
+import type { clinics } from '../content';
+import Icon from './Icon.astro';
+interface Props { clinic: (typeof clinics)[number] }
+const { clinic } = Astro.props;
+---
+<article class="clinic" id={clinic.id}>
+  <div class="clinic-info">
+    <h3>{clinic.city}</h3>
+    <address>{clinic.address}<br />{clinic.complement}</address>
+    <div class="clinic-actions">
+      <a class="text-link" href={clinic.maps} aria-label={'Como chegar em '+clinic.city}>Como chegar <Icon name="diagonal" /></a>
+    </div>
+  </div>
+</article>

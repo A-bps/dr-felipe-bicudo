@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/manrope/wght.css';
+import manrope from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
+import '../styles/site.css';
+import { clinics, doctor, localPath, site, whatsapp } from '../content';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title = 'Dr. Felipe Bicudo | Cirurgia Plástica em São José do Rio Preto e Votuporanga',
+  description = 'Conheça o Dr. Felipe Bicudo, sua formação em cirurgia plástica e os procedimentos. Consulte os locais de atendimento e agende sua avaliação.',
+  canonicalPath = '/',
+} = Astro.props;
+const origin = Astro.site ?? site;
+const canonical = new URL(localPath(canonicalPath), origin).href;
+const homepage = new URL(localPath('/'), origin).href;
+const shareImage = new URL(localPath('/media/compartilhar.jpg'), origin).href;
+const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true' && !import.meta.env.DEV;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': homepage + '#medico',
+      name: 'Felipe Bicudo',
+      honorificPrefix: 'Dr.',
+      jobTitle: 'Médico cirurgião plástico',
+      url: homepage,
+      identifier: [
+        { '@type': 'PropertyValue', propertyID: 'CRM-SP', value: '121227' },
+        { '@type': 'PropertyValue', propertyID: 'RQE', value: '33790' },
+      ],
+      worksFor: clinics.map(({id}) => ({ '@id': homepage + '#' + id })),
+    },
+    ...clinics.map(({id,city,address,complement,postalCode}) => ({
+      '@type': 'Physician',
+      '@id': homepage + '#' + id,
+      name: doctor.name + ' · ' + city,
+      url: homepage + '#' + id,
+      medicalSpecialty: 'https://schema.org/PlasticSurgery',
+      address: {
+        '@type': 'PostalAddress', streetAddress: address + ', ' + complement,
+        addressLocality: city, addressRegion: 'SP', postalCode, addressCountry: 'BR',
+      },
+    })),
+  ],
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <link rel="preload" href={manrope} as="font" type="font/woff2" crossorigin="anonymous" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={localPath('/favicon.svg')} />
+    <meta name="theme-color" content="#f6f5f0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={doctor.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Retrato do Dr. Felipe Bicudo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <slot />
+    <a class="whatsapp-float" href={whatsapp} aria-label="Falar no WhatsApp"><WhatsAppIcon /></a>
+  </body>
+</html>

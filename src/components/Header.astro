@@ -1,0 +1,34 @@
+---
+import { localPath, nav, whatsapp } from '../content';
+import Brand from './Brand.astro';
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+---
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="top" id="inicio">
+  <div class="wrap top-inner">
+    <Brand />
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      {nav.map(({href,label}) => <a href={localPath(href)} aria-current={path === localPath(href) ? 'page' : undefined}>{label}</a>)}
+    </nav>
+    <a class="button button-outline header-cta" href={whatsapp}>Agendar consulta <Icon name="diagonal" /></a>
+    <details class="mobile-nav">
+      <summary aria-label="Menu de navegação"><Icon name="menu" /></summary>
+      <nav aria-label="Navegação móvel">
+        {nav.map(({href,label}) => <a href={localPath(href)} aria-current={path === localPath(href) ? 'page' : undefined}>{label}</a>)}
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-nav');
+  menu?.addEventListener('click', event => {
+    if (event.target instanceof HTMLAnchorElement) menu.open = false;
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+</script>

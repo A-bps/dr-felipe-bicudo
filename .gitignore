@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+
+/docs/*
+!/docs/licenses/
+/public/media/retrato.webp
+/public/media/retrato-mobile.webp

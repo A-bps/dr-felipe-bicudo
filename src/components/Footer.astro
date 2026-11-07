@@ -1,0 +1,25 @@
+---
+import Brand from './Brand.astro';
+import { clinics, doctor, localPath, nav, whatsapp, whatsappNumber } from '../content';
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div>
+        <Brand />
+        <p>Médico · {doctor.crm} · {doctor.rqe}</p>
+        <a href={whatsapp}>WhatsApp {whatsappNumber}</a>
+      </div>
+      <nav aria-label="Navegação do rodapé">
+        {nav.map(({href,label}) => <a href={localPath(href)}>{label}</a>)}
+      </nav>
+      <div class="footer-addresses">
+        {clinics.map(({city,address,complement}) => <address><strong>{city}</strong><span>{address}</span><span>{complement}</span></address>)}
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {doctor.name}</span>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </div>
+</footer>

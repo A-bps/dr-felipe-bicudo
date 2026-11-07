@@ -1,0 +1,38 @@
+---
+interface Props { id: string; title: string }
+const { id, title } = Astro.props;
+const watch = 'https://www.youtube.com/watch?v=' + id;
+const embed = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1';
+---
+<figure class="procedure-video" id="video-transplante">
+  <a class="procedure-video-trigger" href={watch} data-video-embed={embed} data-video-title={title}>
+    <span class="procedure-video-label">
+      <span>Assistir ao vídeo</span>
+      <strong>{title}</strong>
+    </span>
+    <span class="procedure-video-play" aria-hidden="true">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor"><path d="M6 3v14l11-7z" /></svg>
+    </span>
+  </a>
+  <figcaption><a href={watch}>Abrir no YouTube</a></figcaption>
+</figure>
+
+<script>
+  for (const trigger of document.querySelectorAll<HTMLAnchorElement>('[data-video-embed]')) {
+    trigger.addEventListener('click', event => {
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      const { videoEmbed, videoTitle } = trigger.dataset;
+      if (!videoEmbed || !videoTitle) return;
+      event.preventDefault();
+      const frame = document.createElement('iframe');
+      frame.className = 'procedure-video-frame';
+      frame.title = videoTitle;
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      frame.src = videoEmbed;
+      trigger.replaceWith(frame);
+      frame.focus();
+    });
+  }
+</script>

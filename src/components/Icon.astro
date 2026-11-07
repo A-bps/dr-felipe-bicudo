@@ -1,0 +1,14 @@
+---
+const paths = {
+  arrow: 'M3 8h13m-5-5 5 5-5 5',
+  diagonal: 'M4 12 12 4M4 4h8v8',
+  down: 'M8 2v12m-5-5 5 5 5-5',
+  pin: 'M13.5 6.5c0 4-5.5 8-5.5 8s-5.5-4-5.5-8a5.5 5.5 0 1 1 11 0Z M10 6.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z',
+  menu: 'M2 5h12M2 11h12',
+  plus: 'M8 2v12M2 8h12',
+  chat: 'M13.5 7.5A5.5 5.5 0 0 1 8 13c-1 0-2-.25-2.8-.7l-2.7.7.7-2.5a5.5 5.5 0 1 1 10.3-3Z',
+};
+interface Props { name: keyof typeof paths }
+const { name } = Astro.props;
+---
+<svg class="icon" width="16" height="16" viewBox={name === 'arrow' ? '0 0 19 16' : '0 0 16 16'} fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>

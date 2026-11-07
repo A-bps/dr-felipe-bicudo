@@ -1,0 +1,50 @@
+---
+import Site from '../../layouts/Site.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import WhatsAppIcon from '../../components/WhatsAppIcon.astro';
+import { procedureGroups, procedurePages } from '../../procedures';
+import { localPath, whatsapp } from '../../content';
+import '../../styles/procedures.css';
+
+const title = 'Procedimentos | Dr. Felipe Bicudo';
+const description = 'Conheça os procedimentos de cirurgia plástica e transplante capilar e saiba quais dúvidas levar à consulta com o Dr. Felipe Bicudo.';
+---
+<Site {title} {description} canonicalPath="/procedimentos/">
+  <Header />
+  <main id="conteudo" class="procedure-main" tabindex="-1">
+    <section class="procedure-mast" aria-labelledby="procedures-title">
+      <div class="wrap procedure-page-intro">
+        <nav class="crumb" aria-label="Localização"><a href={localPath('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Procedimentos</span></nav>
+        <h1 id="procedures-title">Procedimentos</h1>
+        <p>{description}</p>
+      </div>
+    </section>
+
+    <div class="wrap directory">
+      <nav class="directory-nav" aria-label="Áreas de procedimentos">
+        <p>Por área</p>
+        {procedureGroups.map(({id,name}) => <a href={'#'+id}>{name}</a>)}
+      </nav>
+      <div class="directory-groups">
+        {procedureGroups.map(({id,name}) => (
+          <section id={id} class="directory-group" aria-labelledby={'group-'+id}>
+            <h2 id={'group-'+id}>{name}</h2>
+            <ul>{procedurePages.filter(page => page.group === id).map(({title,path}) => (
+              <li><a href={localPath(path)}>{title} <Icon name="diagonal" /></a></li>
+            ))}</ul>
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <section class="procedure-contact">
+      <div class="wrap">
+        <div><h2>Agende uma consulta</h2><p>Atendimento em São José do Rio Preto e Votuporanga.</p></div>
+        <a class="button button-light" href={whatsapp}>Agendar pelo WhatsApp <WhatsAppIcon /></a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Site>
