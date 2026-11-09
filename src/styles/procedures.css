@@ -54,32 +54,31 @@
 .procedure-reading { display: grid; gap: 42px; }
 .procedure-reading h2 { font-size: clamp(1.55rem, 3.25vw, 2.7rem); }
 .procedure-reading p, .procedure-reading ul { max-width: 680px; margin-top: 15px; }
-.procedure-video { margin-top: 24px; }
 .procedure-video-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 0;
-  border-block: 1px solid var(--line);
-  color: var(--ink);
-  text-decoration: none;
-}
-.procedure-video-label { display: grid; gap: 3px; }
-.procedure-video-label > span { color: var(--accent); font-size: .82rem; font-weight: 700; }
-.procedure-video-label > strong { line-height: 1.4; }
-.procedure-video-play {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  position: relative;
+  display: block;
+  aspect-ratio: 720 / 308;
   background: var(--ink);
   color: var(--cream);
+  text-decoration: none;
+}
+.procedure-video-trigger img { width: 100%; height: 100%; object-fit: cover; }
+.procedure-video-play {
+  position: absolute;
+  inset: auto auto clamp(10px, 2vw, 20px) clamp(10px, 2vw, 20px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 8px 13px;
+  border: 2px solid var(--cream);
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: .875rem;
+  font-weight: 750;
 }
 .procedure-video-trigger:hover .procedure-video-play { background: var(--accent); }
-.procedure-video-trigger:hover strong { text-decoration: underline; }
 .procedure-video-frame {
   display: block;
   width: 100%;
@@ -109,6 +108,7 @@
 .procedure-contact h2 { color: var(--cream); }
 .procedure-contact p { margin-top: 11px; }
 @media (max-width: 700px) {
+  .procedure-video-trigger { aspect-ratio: 16 / 9; }
   .directory, .procedure-detail { grid-template-columns: minmax(0, 1fr); }
   .directory-nav { position: static; display: flex; flex-wrap: wrap; gap: 0 14px; }
   .directory-nav p { flex-basis: 100%; margin-bottom: 0; }

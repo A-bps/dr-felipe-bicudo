@@ -39,10 +39,10 @@ const isHair = page.path === '/transplante-capilar/';
     </header>
     <div class="wrap procedure-detail">
       <article class="procedure-reading">
+        {isHair && <ProcedureVideo id="qUYOmKUbXaI" title="Transplante capilar com o Dr. Felipe Bicudo" />}
         <section aria-labelledby="overview-title">
           <h2 id="overview-title">Sobre o procedimento</h2>
           <p>{page.overview}</p>
-          {isHair && <ProcedureVideo id="qUYOmKUbXaI" title="Transplante capilar com o Dr. Felipe Bicudo" />}
         </section>
         <section aria-labelledby="questions-title">
           <h2 id="questions-title">Perguntas para levar à consulta</h2>
