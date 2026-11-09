@@ -16,6 +16,7 @@ export const nav = [
   { id: 'sobre', href: '/#sobre', label: 'Sobre' },
   { id: 'procedimentos', href: '/procedimentos/', label: 'Procedimentos' },
   { id: 'clinicas', href: '/#clinicas', label: 'Clínicas' },
+  { id: 'blog', href: '/blog/', label: 'Blog' },
   { id: 'contato', href: '/#contato', label: 'Contato' },
 ];
 

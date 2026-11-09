@@ -1,71 +1,29 @@
 ---
-import Site from '../layouts/Site.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Icon from '../components/Icon.astro';
-import ProcedureVideo from '../components/ProcedureVideo.astro';
-import WhatsAppIcon from '../components/WhatsAppIcon.astro';
-import { procedureGroups, procedurePages, procedureAliases, type ProcedurePage } from '../procedures';
-import { clinics, doctor, localPath, whatsapp } from '../content';
-import '../styles/procedures.css';
+import BlogArticle from '../components/BlogArticle.astro';
+import ProcedurePage from '../components/ProcedurePage.astro';
+import { blogPosts, type BlogPost } from '../blog';
+import { procedurePages, procedureAliases, type ProcedurePage as ProcedureData } from '../procedures';
+
+type Props = { kind: 'procedure'; page: ProcedureData } | { kind: 'post'; post: BlogPost };
 
 export function getStaticPaths() {
-  const mainPaths = procedurePages.map(page => ({ path: page.path, page }));
+  const procedures = procedurePages.map(page => ({ path: page.path, page }));
   const aliases = procedureAliases.map(({path,canonical}) => ({
     path,
     page: procedurePages.find(entry => entry.path === canonical)!,
   }));
-  return [...mainPaths, ...aliases].map(({path,page}) => ({
-    params: { slug: path.slice(1,-1) },
-    props: { page },
-  }));
+  return [
+    ...[...procedures, ...aliases].map(({path,page}) => ({
+      params: { slug: path.slice(1,-1) },
+      props: { kind: 'procedure', page } satisfies Props,
+    })),
+    ...blogPosts.map(post => ({
+      params: { slug: post.slug },
+      props: { kind: 'post', post } satisfies Props,
+    })),
+  ];
 }
 
-interface Props { page: ProcedurePage }
-const { page } = Astro.props;
-const group = procedureGroups.find(({id}) => id === page.group)!;
-const related = procedurePages.filter(entry => entry.path !== page.path && entry.group === page.group).slice(0, 4);
-const isHair = page.path === '/transplante-capilar/';
+const route = Astro.props;
 ---
-<Site title={page.title + ' | ' + doctor.name} description={page.overview} canonicalPath={page.path}>
-  <Header />
-  <main id="conteudo" class="procedure-main" tabindex="-1">
-    <header class="procedure-mast">
-      <div class="wrap procedure-page-intro">
-        <nav class="crumb" aria-label="Localização"><a href={localPath('/')}>Início</a><span aria-hidden="true">/</span><a href={localPath('/procedimentos/')}>Procedimentos</a></nav>
-        <a class="procedure-topic" href={localPath('/procedimentos/#'+group.id)}>{group.name}</a>
-        <h1>{page.title}</h1>
-      </div>
-    </header>
-    <div class="wrap procedure-detail">
-      <article class="procedure-reading">
-        <section aria-labelledby="overview-title">
-          <h2 id="overview-title">Sobre o procedimento</h2>
-          <p>{page.overview}</p>
-          {isHair && <ProcedureVideo id="qUYOmKUbXaI" title="Transplante capilar com o Dr. Felipe Bicudo" />}
-        </section>
-        <section aria-labelledby="questions-title">
-          <h2 id="questions-title">Perguntas para levar à consulta</h2>
-          <ul>{page.questions.map(question => <li>{question}</li>)}</ul>
-        </section>
-      </article>
-      <aside class="procedure-aside" aria-labelledby="booking-title">
-        <h2 id="booking-title">Consulta com o Dr. Felipe Bicudo</h2>
-        <p>{doctor.crm} · {doctor.rqe}</p>
-        <ul>{clinics.map(({city,id}) => <li><a href={localPath('/#'+id)}>{city}</a></li>)}</ul>
-        <a class="button button-solid" href={whatsapp}>Agendar pelo WhatsApp <WhatsAppIcon /></a>
-      </aside>
-    </div>
-
-    <section class="procedure-related">
-      <div class="wrap">
-        <div class="procedure-related-head">
-          <h2>{related.length ? 'Outros procedimentos' : 'Conheça as áreas de atuação'}</h2>
-          <a class="text-link" href={localPath('/procedimentos/')}>Todos os procedimentos <Icon name="arrow" /></a>
-        </div>
-        {related.length > 0 && <ul>{related.map(({title,path}) => <li><a href={localPath(path)}>{title} <Icon name="diagonal" /></a></li>)}</ul>}
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Site>
+{route.kind === 'post' ? <BlogArticle post={route.post} /> : <ProcedurePage page={route.page} />}

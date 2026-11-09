@@ -1,0 +1,29 @@
+.blog-main { background: var(--cream); }
+.blog-mast { padding-block: clamp(34px, 7vw, 92px); background: var(--ink); color: var(--light-gold); }
+.blog-mast h1 { max-width: 24ch; color: var(--cream); font-size: clamp(2rem, 5.7vw, 5.15rem); text-wrap: balance; }
+.blog-mast p, .blog-mast time { display: block; margin-top: 14px; }
+.blog-breadcrumb { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 12px; color: var(--light-gold); }
+.blog-mast :focus-visible { outline-color: var(--light-gold); }
+.blog-directory, .blog-body { padding-block: clamp(38px, 6.5vw, 88px); }
+.blog-directory h2 { margin-bottom: 22px; font-size: clamp(1.6rem, 3.25vw, 2.65rem); }
+.blog-search { max-width: 420px; margin-bottom: 20px; }
+.blog-search label { display: block; color: var(--ink); font-weight: 700; }
+.blog-search input { display: block; width: 100%; min-height: 46px; margin-top: 5px; padding: 7px 12px; border: 1px solid var(--accent); background: var(--cream); color: var(--ink); font: inherit; }
+.blog-search p { margin-top: 6px; color: var(--muted); font-size: .83rem; }
+.blog-list { margin: 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+.blog-list li { border-bottom: 1px solid var(--line); }
+.blog-list a { display: grid; grid-template-columns: 160px minmax(0,1fr) 16px; align-items: center; gap: 10px 22px; min-height: 60px; padding-block: 10px; color: var(--ink); text-decoration: none; }
+.blog-list a:hover .blog-list-title { text-decoration: underline; }
+.blog-list time { color: var(--muted); font-size: .84rem; }
+.blog-list-title { font-weight: 740; }
+.blog-prose { max-width: 71ch; }
+.blog-prose > * + * { margin-top: 1em; }
+.blog-prose h2, .blog-prose h3 { margin-top: 1.55em; font-size: clamp(1.28rem, 3.35vw, 2.1rem); }
+.blog-prose h3 { font-size: clamp(1.12rem, 2.5vw, 1.55rem); }
+.blog-prose a { color: var(--accent); }
+.blog-prose blockquote { padding-left: 1rem; border-left: 2px solid var(--gold); }
+.blog-return { margin-top: 26px; }
+@media (max-width: 650px) {
+  .blog-list a { grid-template-columns: minmax(0,1fr) 16px; gap: 4px 12px; }
+  .blog-list time { grid-column: 1 / -1; }
+}

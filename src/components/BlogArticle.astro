@@ -1,0 +1,32 @@
+---
+import Site from '../layouts/Site.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Icon from './Icon.astro';
+import { blogPath, formatBlogDate, type BlogPost } from '../blog';
+import { doctor, localPath, whatsapp } from '../content';
+import '../styles/blog.css';
+
+interface Props { post: BlogPost }
+const { post } = Astro.props;
+const body = post.html.replaceAll('__BLOG_SITE_BASE__', localPath('')).replaceAll('__BLOG_WHATSAPP__', whatsapp);
+---
+<Site title={post.title + ' | ' + doctor.name} description={post.description} canonicalPath={blogPath(post.slug)}>
+  <Header />
+  <main id="conteudo" class="blog-main" tabindex="-1">
+    <article>
+      <header class="blog-mast">
+        <div class="wrap blog-mast-inner">
+          <a class="blog-breadcrumb" href={localPath('/blog/')}>Todos os artigos</a>
+          <h1>{post.title}</h1>
+          <time datetime={post.date}>Publicado em {formatBlogDate(post.date)}</time>
+        </div>
+      </header>
+      <div class="wrap blog-body">
+        <div class="blog-prose" set:html={body} />
+        <a class="text-link blog-return" href={localPath('/blog/')}>Voltar ao blog <Icon name="diagonal" /></a>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Site>

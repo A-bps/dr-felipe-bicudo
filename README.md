@@ -1,6 +1,6 @@
 # Dr. Felipe Bicudo
 
-Prévia para avaliação da página institucional de cirurgia plástica e transplante capilar. A home, o catálogo e as páginas de procedimento fazem parte do mesmo site. A navegação da prévia usa apenas rotas novas, WhatsApp, mapas e o vídeo no YouTube. O agendamento da prévia usa o WhatsApp único confirmado.
+Prévia para avaliação da página institucional de cirurgia plástica e transplante capilar. A home, o catálogo, as páginas de procedimento e o blog fazem parte do mesmo site. A prévia local do blog reúne os textos e as datas de publicação dos artigos originais. O agendamento da prévia usa o WhatsApp único confirmado.
 
 [Abrir a prévia no GitHub Pages](https://a-bps.github.io/dr-felipe-bicudo/)
 

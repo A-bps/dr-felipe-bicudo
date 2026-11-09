@@ -1,0 +1,63 @@
+---
+import Site from '../../layouts/Site.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import { blogPath, blogPosts, formatBlogDate } from '../../blog';
+import { localPath } from '../../content';
+import '../../styles/blog.css';
+---
+<Site title="Blog | Dr. Felipe Bicudo" description="Arquivo de artigos do site do Dr. Felipe Bicudo sobre cirurgia plástica e transplante capilar." canonicalPath="/blog/">
+  <Header />
+  <main id="conteudo" class="blog-main" tabindex="-1">
+    <header class="blog-mast">
+      <div class="wrap blog-mast-inner">
+        <h1>Blog</h1>
+        <p>Artigos sobre cirurgia plástica e transplante capilar.</p>
+      </div>
+    </header>
+    <section class="wrap blog-directory" aria-labelledby="blog-directory-title">
+      <h2 id="blog-directory-title">Arquivo de artigos</h2>
+      <div class="blog-search" hidden>
+        <label for="blog-query">Buscar por título</label>
+        <input type="search" id="blog-query" autocomplete="off" placeholder="Ex.: transplante capilar" />
+        <p role="status" id="blog-results">{blogPosts.length} artigos</p>
+      </div>
+      <ul class="blog-list">
+        {blogPosts.map(post => (
+          <li>
+            <a href={localPath(blogPath(post.slug))}>
+              <time datetime={post.date}>{formatBlogDate(post.date)}</time>
+              <span class="blog-list-title">{post.title}</span>
+              <Icon name="diagonal" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Site>
+
+<script>
+  const search = document.querySelector<HTMLElement>('.blog-search');
+  const input = document.querySelector<HTMLInputElement>('#blog-query');
+  const results = document.querySelector('#blog-results');
+  if (search && input && results) {
+    const normalize = (text: string) => text.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase('pt-BR');
+    const items = Array.from(document.querySelectorAll<HTMLLIElement>('.blog-list li')).map(item => ({
+      item,
+      title: normalize(item.querySelector('.blog-list-title')?.textContent ?? ''),
+    }));
+    search.hidden = false;
+    input.addEventListener('input', () => {
+      const query = normalize(input.value.trim());
+      let count = 0;
+      for (const {item,title} of items) {
+        item.hidden = !title.includes(query);
+        if (!item.hidden) count++;
+      }
+      results.textContent = count === 0 ? 'Nenhum artigo encontrado' : count === 1 ? '1 artigo' : count + ' artigos';
+    });
+  }
+</script>
