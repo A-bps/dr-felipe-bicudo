@@ -7,7 +7,7 @@
   gap: 3px 20px;
   align-items: center;
   padding-block: 10px;
-  border-top: 1px solid #929c92;
+  border-top: 1px solid var(--gold);
   color: var(--ink);
   font-size: clamp(.75rem, 1.2vw, .95rem);
   font-weight: 720;
@@ -27,7 +27,7 @@
   overflow: hidden;
   aspect-ratio: 2.95;
   isolation: isolate;
-  background: #d6d9cb;
+  background: var(--light-gold);
 }
 .cover-photo img {
   position: absolute;
@@ -41,13 +41,14 @@
 .cover-figure figcaption { padding-top: 10px; color: var(--muted); font-size: .82rem; }
 .home-index {
   padding-block: clamp(29px, 4.4vw, 58px);
-  background: #e5e9e0;
-  border-block: 1px solid #cbd3c7;
+  background: var(--gold);
+  border-block: 1px solid var(--accent);
 }
 .home-index-head { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 0 18px; margin-bottom: 15px; }
+.home-index .text-link, .home-index :focus-visible { color: var(--ink); outline-color: var(--ink); }
 .home-index-head h2 { font-size: clamp(1.8rem, 3.35vw, 3rem); }
-.home-procedures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-block: 1px solid #a7b4a8; }
-.home-procedures li + li { border-inline-start: 1px solid #a7b4a8; }
+.home-procedures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-block: 1px solid var(--accent); }
+.home-procedures li + li { border-inline-start: 1px solid var(--accent); }
 .home-procedures a {
   position: relative;
   display: grid;
@@ -60,9 +61,9 @@
   color: var(--ink);
   text-decoration: none;
 }
-.home-procedures a:hover { background: #f4f6ef; }
+.home-procedures a:hover { background: var(--light-gold); }
 .home-procedures a:hover h3 { text-decoration: underline; }
-.home-procedures span { grid-column: 1 / -1; align-self: start; font-size: .76rem; color: var(--muted); font-weight: 700; }
+.home-procedures span { grid-column: 1 / -1; align-self: start; font-size: .76rem; font-weight: 700; }
 .home-procedures h3 { font-size: clamp(1.15rem, 2vw, 1.8rem); }
 .home-procedures .icon { align-self: end; margin-bottom: 3px; }
 
@@ -79,14 +80,14 @@
 .profile-training dd { display: grid; gap: 3px; margin: 0; }
 .profile-training dd span { color: var(--muted); font-size: .82rem; }
 
-.visit { padding-block: clamp(48px, 7vw, 96px); background: var(--ink); color: #e3ece5; }
+.visit { padding-block: clamp(48px, 7vw, 96px); background: var(--ink); color: var(--light-gold); }
 .visit h2, .visit h3 { color: var(--cream); }
 .visit-locations { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-block: 28px; }
-.visit .clinic { padding-block: 18px; min-width: 0; border-top: 1px solid #638077; }
+.visit .clinic { padding-block: 18px; min-width: 0; border-top: 1px solid var(--gold); }
 .visit .clinic h3 { font-size: clamp(1.25rem, 2.5vw, 2.3rem); }
 .visit address { margin-top: 12px; }
-.visit .text-link { color: #e3ece5; }
-.visit :focus-visible { outline-color: #e3ece5; }
+.visit .text-link { color: var(--light-gold); }
+.visit :focus-visible { outline-color: var(--light-gold); }
 .visit-contact {
   display: flex;
   justify-content: space-between;
@@ -94,7 +95,7 @@
   flex-wrap: wrap;
   gap: 14px 24px;
   padding-top: 23px;
-  border-top: 1px solid #638077;
+  border-top: 1px solid var(--gold);
 }
 .visit-contact p { margin-top: 8px; }
 
@@ -112,7 +113,7 @@
   .cover-photo img { width: 94%; }
 
   .home-procedures { grid-template-columns: 1fr; }
-  .home-procedures li + li { border-inline-start: 0; border-top: 1px solid #a7b4a8; }
+  .home-procedures li + li { border-inline-start: 0; border-top: 1px solid var(--accent); }
   .home-procedures a { padding: 12px 3px; min-height: 66px; gap: 4px 12px; }
   .profile-ledger { grid-template-columns: 1fr; }
 }

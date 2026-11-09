@@ -1,21 +1,21 @@
 /* Shared editorial layout for the directory and individual procedures. */
 .procedure-main { background: var(--cream); }
-.procedure-mast { color: #f6f5f0; background: var(--ink); }
+.procedure-mast { color: var(--cream); background: var(--ink); }
 .procedure-page-intro { padding-block: clamp(36px, 5vw, 76px) clamp(48px, 8vw, 110px); }
-.crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; color: #e0e7e4; font-size: .8rem; }
+.crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; color: var(--light-gold); font-size: .8rem; }
 .crumb a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: .3em; }
 .procedure-page-intro h1 {
   max-width: 950px;
   margin-block: 28px 0;
-  color: #f6f5f0;
+  color: var(--cream);
   font-size: clamp(2.6rem, 6.6vw, 6rem);
   letter-spacing: -.055em;
   text-wrap: balance;
 }
-.procedure-page-intro > p { max-width: 560px; margin-top: 20px; color: #e0e7e4; font-size: clamp(.98rem, 1.55vw, 1.14rem); }
-.procedure-topic { display: inline-flex; align-items: center; margin-top: 25px; min-height: 44px; color: #e0e7e4; font-size: .8rem; font-weight: 800; }
+.procedure-page-intro > p { max-width: 560px; margin-top: 20px; color: var(--light-gold); font-size: clamp(.98rem, 1.55vw, 1.14rem); }
+.procedure-topic { display: inline-flex; align-items: center; margin-top: 25px; min-height: 44px; color: var(--light-gold); font-size: .8rem; font-weight: 800; }
 .procedure-topic + h1 { margin-top: 0; }
-.procedure-mast :focus-visible, .procedure-contact :focus-visible { outline-color: #f6f5f0; }
+.procedure-mast :focus-visible, .procedure-contact :focus-visible { outline-color: var(--cream); }
 
 .directory {
   display: grid;
@@ -104,9 +104,9 @@
 .procedure-aside .button { min-height: 48px; }
 .procedure-related { padding-block: clamp(45px, 7vw, 85px); border-top: 1px solid var(--line); background: var(--paper); }
 .procedure-related-head { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: end; gap: 8px 22px; }
-.procedure-contact { padding-block: clamp(42px, 7vw, 80px); background: var(--ink); color: #e0e7e4; }
+.procedure-contact { padding-block: clamp(42px, 7vw, 80px); background: var(--ink); color: var(--light-gold); }
 .procedure-contact .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-.procedure-contact h2 { color: #f6f5f0; }
+.procedure-contact h2 { color: var(--cream); }
 .procedure-contact p { margin-top: 11px; }
 @media (max-width: 700px) {
   .directory, .procedure-detail { grid-template-columns: minmax(0, 1fr); }
