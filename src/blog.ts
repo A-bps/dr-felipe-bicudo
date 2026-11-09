@@ -5,6 +5,7 @@ export interface BlogPost {
   title: string;
   date: string;
   description: string;
+  cover?: string;
   html: string;
 }
 

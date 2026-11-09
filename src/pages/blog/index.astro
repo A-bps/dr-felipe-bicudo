@@ -10,12 +10,26 @@ import '../../styles/blog.css';
 <Site title="Blog | Dr. Felipe Bicudo" description="Arquivo de artigos do site do Dr. Felipe Bicudo sobre cirurgia plástica e transplante capilar." canonicalPath="/blog/">
   <Header />
   <main id="conteudo" class="blog-main" tabindex="-1">
-    <header class="blog-mast">
-      <div class="wrap blog-mast-inner">
-        <h1>Blog</h1>
-        <p>Artigos sobre cirurgia plástica e transplante capilar.</p>
+    <section class="blog-featured" aria-labelledby="blog-featured-title">
+      <div class="wrap">
+        <h1 id="blog-featured-title">Publicações recentes</h1>
+        <ul class="blog-cards">
+          {blogPosts.slice(0, 3).map(post => (
+            <li>
+              <a class="blog-card" href={localPath(blogPath(post.slug))}>
+                {post.cover && <img src={localPath(post.cover)} width="768" height="432" alt="" decoding="async" />}
+                <div class="blog-card-copy">
+                  <h2>{post.title}</h2>
+                  <p>{post.description}</p>
+                  <span class="blog-card-read">Ler artigo <Icon name="diagonal" /></span>
+                </div>
+                <time datetime={post.date}>{formatBlogDate(post.date)}</time>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </header>
+    </section>
     <section class="wrap blog-directory" aria-labelledby="blog-directory-title">
       <h2 id="blog-directory-title">Arquivo de artigos</h2>
       <div class="blog-search" hidden>
