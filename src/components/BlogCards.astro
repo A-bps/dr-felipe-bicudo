@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { blogPath, formatBlogDate, type BlogPost } from '../blog';
+import { localPath } from '../content';
+
+interface Props {
+  posts: readonly BlogPost[];
+  heading?: 'h2' | 'h3';
+  lazy?: boolean;
+}
+
+const { posts, heading: Heading = 'h2', lazy = false } = Astro.props;
+---
+<ul class="blog-cards">
+  {posts.map(post => (
+    <li>
+      <a class="blog-card" href={localPath(blogPath(post.slug))}>
+        {post.cover && <img src={localPath(post.cover)} width={post.coverWidth ?? 768} height={post.coverHeight ?? 432} alt="" decoding="async" loading={lazy ? 'lazy' : undefined} />}
+        <div class="blog-card-copy">
+          <Heading class="blog-card-title">{post.title}</Heading>
+          <p>{post.description}</p>
+          <span class="blog-card-read">Ler artigo <Icon name="diagonal" /></span>
+        </div>
+        <time datetime={post.date}>{formatBlogDate(post.date)}</time>
+      </a>
+    </li>
+  ))}
+</ul>

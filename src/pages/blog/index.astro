@@ -2,6 +2,7 @@
 import Site from '../../layouts/Site.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import BlogCards from '../../components/BlogCards.astro';
 import Icon from '../../components/Icon.astro';
 import { blogPath, blogPosts, formatBlogDate } from '../../blog';
 import { localPath } from '../../content';
@@ -13,21 +14,7 @@ import '../../styles/blog.css';
     <section class="blog-featured" aria-labelledby="blog-featured-title">
       <div class="wrap">
         <h1 id="blog-featured-title">Publicações recentes</h1>
-        <ul class="blog-cards">
-          {blogPosts.slice(0, 3).map(post => (
-            <li>
-              <a class="blog-card" href={localPath(blogPath(post.slug))}>
-                {post.cover && <img src={localPath(post.cover)} width="768" height="432" alt="" decoding="async" />}
-                <div class="blog-card-copy">
-                  <h2>{post.title}</h2>
-                  <p>{post.description}</p>
-                  <span class="blog-card-read">Ler artigo <Icon name="diagonal" /></span>
-                </div>
-                <time datetime={post.date}>{formatBlogDate(post.date)}</time>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <BlogCards posts={blogPosts.slice(0, 3)} />
       </div>
     </section>
     <section class="wrap blog-directory" aria-labelledby="blog-directory-title">

@@ -2,13 +2,15 @@
 import Site from '../layouts/Site.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import BlogCards from './BlogCards.astro';
 import Icon from './Icon.astro';
-import { blogPath, formatBlogDate, type BlogPost } from '../blog';
+import { blogPath, formatBlogDate, relatedBlogPosts, type BlogPost } from '../blog';
 import { doctor, localPath, whatsapp } from '../content';
 import '../styles/blog.css';
 
 interface Props { post: BlogPost }
 const { post } = Astro.props;
+const related = relatedBlogPosts(post);
 const body = post.html.replaceAll('__BLOG_SITE_BASE__', localPath('')).replaceAll('__BLOG_WHATSAPP__', whatsapp);
 ---
 <Site title={post.title + ' | ' + doctor.name} description={post.description} canonicalPath={blogPath(post.slug)}>
@@ -27,6 +29,12 @@ const body = post.html.replaceAll('__BLOG_SITE_BASE__', localPath('')).replaceAl
         <a class="text-link blog-return" href={localPath('/blog/')}>Voltar ao blog <Icon name="diagonal" /></a>
       </div>
     </article>
+    <section class="blog-related" aria-labelledby="blog-related-title">
+      <div class="wrap">
+        <h2 id="blog-related-title">Posts relacionados</h2>
+        <BlogCards posts={related} heading="h3" lazy />
+      </div>
+    </section>
   </main>
   <Footer />
 </Site>

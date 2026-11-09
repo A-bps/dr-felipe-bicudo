@@ -6,6 +6,9 @@ export interface BlogPost {
   date: string;
   description: string;
   cover?: string;
+  coverWidth?: number;
+  coverHeight?: number;
+  related?: readonly string[];
   html: string;
 }
 
@@ -16,3 +19,7 @@ const dateFormat = new Intl.DateTimeFormat('pt-BR', {
 });
 export const formatBlogDate = (date: string) => dateFormat.format(new Date(date));
 export const blogPath = (slug: string) => '/' + slug + '/';
+const postsBySlug = new Map(blogPosts.map(post => [post.slug, post]));
+export const relatedBlogPosts = (post: BlogPost) => (post.related ?? [])
+  .map(slug => postsBySlug.get(slug))
+  .filter((related): related is BlogPost => related !== undefined && related.slug !== post.slug);
