@@ -70,11 +70,16 @@
 .profile-ledger {
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
-  gap: clamp(28px, 7.2vw, 114px);
+  grid-template-areas: "intro video" "training video";
+  align-items: start;
+  gap: 28px clamp(28px, 7.2vw, 114px);
   padding-block: clamp(54px, 7vw, 100px);
 }
+.profile-intro { grid-area: intro; }
 .profile-intro p { max-width: 47ch; margin-top: 17px; }
-.profile-training { margin: 0; border-top: 1px solid var(--line); }
+.profile-ledger .video-player { grid-area: video; }
+.profile-ledger .video-player .video-play { inset: 65% auto auto 50%; transform: translate(-50%, -50%); white-space: nowrap; }
+.profile-training { grid-area: training; margin: 0; border-top: 1px solid var(--line); }
 .profile-training > div { display: grid; grid-template-columns: minmax(86px, .4fr) 1fr; gap: 12px; padding-block: 15px; border-bottom: 1px solid var(--line); }
 .profile-training dt { color: var(--accent); font-size: .86rem; font-weight: 700; font-variant-numeric: tabular-nums; }
 .profile-training dd { display: grid; gap: 3px; margin: 0; }
@@ -115,7 +120,10 @@
   .home-procedures { grid-template-columns: 1fr; }
   .home-procedures li + li { border-inline-start: 0; border-top: 1px solid var(--accent); }
   .home-procedures a { padding: 12px 3px; min-height: 66px; gap: 4px 12px; }
-  .profile-ledger { grid-template-columns: 1fr; }
+  .profile-ledger {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "video" "training";
+  }
 }
 
 @media (max-width: 470px) {

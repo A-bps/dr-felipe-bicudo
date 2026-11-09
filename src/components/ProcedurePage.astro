@@ -3,7 +3,7 @@ import Site from '../layouts/Site.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Icon from './Icon.astro';
-import ProcedureVideo from './ProcedureVideo.astro';
+import VideoPlayer from './VideoPlayer.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { procedureGroups, procedurePages, type ProcedurePage } from '../procedures';
 import { clinics, doctor, localPath, whatsapp } from '../content';
@@ -27,7 +27,13 @@ const isHair = page.path === '/transplante-capilar/';
     </header>
     <div class="wrap procedure-detail">
       <article class="procedure-reading">
-        {isHair && <ProcedureVideo id="qUYOmKUbXaI" title="Transplante capilar com o Dr. Felipe Bicudo" />}
+        {isHair && <VideoPlayer
+          anchor="video-transplante"
+          id="qUYOmKUbXaI"
+          title="Transplante capilar com o Dr. Felipe Bicudo"
+          cover={{ path: '/media/capa-transplante.webp', width: 820, height: 430 }}
+          priority
+        />}
         <section aria-labelledby="overview-title">
           <h2 id="overview-title">Sobre o procedimento</h2>
           <p>{page.overview}</p>

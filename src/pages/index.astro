@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import WhatsAppIcon from '../components/WhatsAppIcon.astro';
 import Clinic from '../components/Clinic.astro';
+import VideoPlayer from '../components/VideoPlayer.astro';
 import { clinics, credentials, doctor, localPath, procedures, whatsapp } from '../content';
 import '../styles/home.css';
 ---
@@ -44,6 +45,12 @@ import '../styles/home.css';
         <h2 id="sobre-title">Formação e atuação</h2>
         <p>Dr. Felipe Bicudo é médico formado pela FAMERP, onde fez residência em Cirurgia Geral e Cirurgia Plástica. Atua em cirurgia plástica estética e reparadora, com foco em transplante capilar, e exerce atividade docente na Faculdade de Medicina FACERES.</p>
       </div>
+      <VideoPlayer
+        anchor="video-apresentacao"
+        id="X-qVI2zEqZE"
+        title="Dr. Felipe Bicudo — Cirurgia Plástica e Transplante Capilar"
+        cover={{ path: '/media/capa-apresentacao.webp', width: 960, height: 540 }}
+      />
       <dl class="profile-training" id="formacao">
         {credentials.map(([year,degree,school]) => (
           <div><dt>{year}</dt><dd><strong>{degree}</strong><span>{school}</span></dd></div>
